@@ -238,3 +238,35 @@ SELECT * FROM tb_promocao;
 
 COMMIT;
 
+-- SELEÇÃO DE COLUNAS ESPECÍFICAS
+SELECT id_cliente, nome, sobrenome, dt_nascimento, telefone 
+FROM tb_clientes;
+
+-- SELEÇÃO DE TODAS AS COLUNAS
+SELECT *
+FROM tb_clientes
+WHERE id_cliente = 2;
+
+-- SELEÇÃO DE ID DA LINHA E COLUNA
+SELECT ROWID, id_cliente
+FROM tb_clientes;
+
+-- SELEÇÃO DE NUMERO DA LINHA E COLUNAS
+SELECT ROWNUM, id_cliente, nome, sobrenome 
+FROM tb_clientes;
+
+-- SELEÇÃO DE NÚMERO DA LINHA E COLUNAS COM APENAS UMA TUPLA
+SELECT ROWNUM, id_cliente, nome, sobrenome
+FROM tb_clientes
+WHERE id_cliente = 3;
+
+-- CALCULADORA SQL
+SELECT 2 * 6
+FROM dual;
+
+-- PRECEDÊNCIAS
+SELECT 10 * 12/ 3 - 1
+FROM dual;
+
+SELECT 10 * (12/3 - 1)
+FROM dual;
