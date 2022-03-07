@@ -243,3 +243,9 @@ FROM tb_produtos p, tb_tipos_produtos tp
 WHERE p.id_tipo_produto(+) = tp.id_tipo_produto
 ORDER BY 1;
       
+
+-- ORA-01719
+SELECT p.nm_produto AS produto, tp.nm_tipo_produto AS tipo
+FROM tb_produtos p, tb_tipos_produtos tp
+WHERE p.id_tipo_produto(+) = tp.id_tipo_produto
+OR p.id_tipo_produto = 1; 
