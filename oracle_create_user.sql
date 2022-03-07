@@ -1,3 +1,4 @@
+-- Nome do DB: Oracle_11gR2
 -- Tipo de conexão: TNS
 -- Apelido da rede: ORSL
 -- Usuario e senha padrão: system e oracle
