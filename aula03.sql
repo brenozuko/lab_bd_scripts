@@ -194,3 +194,44 @@ SELECT tb_produtos.nm_produto,
 FROM tb_produtos, tb_tipos_produtos
 WHERE tb_produtos.id_tipo_produto = tb_tipos_produtos.id_tipo_produto
 AND tb_produtos.id_produto = 3;
+
+-- JOIN e ORDER BY
+SELECT tb_produtos.nm_produto,
+       tb_tipos_produtos.nm_tipo_produto
+FROM tb_produtos, tb_tipos_produtos
+WHERE tb_produtos.id_tipo_produto = tb_tipos_produtos.id_tipo_produto
+ORDER BY tb_produtos.nm_produto;
+
+-- Usando Aliases (APELIDOS)
+
+SELECT p.nm_produto, tp.nm_tipo_produto
+FROM tb_produtos p, tb_tipos_produtos tp
+WHERE p.id_tipo_produto = tp.id_tipo_produto
+ORDER BY p.nm_produto;
+
+-- Produto cartesiano
+SELECT p.id_tipo_produto, tp.id_tipo_produto
+FROM tb_produtos p, tb_tipos_produtos tp;
+
+-- Seleção entre 3 tabelas
+
+SELECT c.nome, c.sobrenome, p.nm_produto AS produto,
+       tp.nm_tipo_produto AS tipo
+FROM tb_clientes c, tb_compras co, tb_produtos p, tb_tipos_produtos tp
+WHERE c.id_cliente = co.id_cliente AND
+      p.id_produto = co.id_produto AND
+      p.id_tipo_produto = tp.id_tipo_produto
+ORDER BY p.nm_produto;
+
+-- Intervalo de salários, nome e sobrenome de funcionarios: não-equijoin
+SELECT f.nome, f.sobrenome, f.cargo, f.salario, gs.id_salario
+FROM tb_funcionarios f, tb_grades_salarios gs
+WHERE f.salario BETWEEN gs.base_salario AND gs.teto_salario
+ORDER BY gs.id_salario;
+
+-- LEFT ALTER JOIN - Operador a direita
+
+SELECT p.nm_produto AS produto, tp.nm_tipo_produto AS tipo
+FROM tb_produtos p, tb_tipos_produtos tp
+WHERE p.id_tipo_produto = tp.id_tipo_produto(+)
+ORDER BY 1;
