@@ -109,7 +109,65 @@ FROM tb_promocao
 WHERE nome LIKE '%\%%' ESCAPE '\';
 
 -- IN
-
 SELECT *
 FROM tb_clientes
 WHERE id_cliente IN (2,3,5);
+
+-- NOT IN
+SELECT *
+FROM tb_clientes
+WHERE id_cliente NOT IN (2,3,5);
+
+SELECT *
+FROM tb_clientes
+WHERE id_cliente NOT IN (2,3,5, NULL);
+
+-- BETWEEN
+SELECT *
+FROM tb_clientes
+WHERE id_cliente BETWEEN 1 AND 3;
+
+-- NOT BETWEEN
+
+SELECT * 
+FROM tb_clientes
+WHERE id_cliente NOT BETWEEN 1 AND 3;
+
+-- OPERADORES LÓGICOS
+
+-- AND e OR
+SELECT * 
+FROM tb_clientes
+WHERE dt_nascimento > '01/JAN/1970' AND 
+      id_cliente > 3;
+
+-- AND tem precedência sobre OR
+SELECT *
+FROM tb_clientes
+WHERE dt_nascimento > '01/JAN/1970' OR
+      id_cliente < 2 AND
+      telefone LIKE '%1211';
+
+
+-- ORDER BY
+
+-- Default: ASC
+SELECT * 
+FROM tb_clientes
+ORDER BY sobrenome;
+
+-- Primeira coluna define o order by: ASC
+SELECT * 
+FROM tb_clientes
+ORDER BY nome ASC, sobrenome DESC;
+
+
+-- Ordena pelo id_cliente (de acordo com as especificações do SELECT)
+SELECT id_cliente, nome, sobrenome
+FROM tb_clientes
+ORDER BY 1;
+
+-- Respeita a ordem de criação da tabela
+SELECT *
+FROM tb_clientes
+ORDER BY 3;
