@@ -82,7 +82,6 @@ SELECT *
 FROM tb_clientes
 WHERE id_cliente > ANY(2,3,4);
 
-
 -- OPERADORES SQL
 
 -- LIKE
@@ -94,6 +93,7 @@ SELECT *
 FROM tb_clientes
 WHERE nome LIKE '%a';
 
+-- Seleciona nome com 4 caracteres
 SELECT *
 FROM tb_clientes
 WHERE nome LIKE '____';
@@ -102,5 +102,15 @@ SELECT *
 FROM tb_clientes
 WHERE nome LIKE 'J%';
 
+-- Escapa caracteres
+-- P.S: ESCAPE pode ser definido com qualquer caracter
+SELECT nome
+FROM tb_promocao
+WHERE nome LIKE '%\%%' ESCAPE '\';
 
 
+-- IN
+
+SELECT *
+FROM tb_clientes
+WHERE id_cliente IN (2,3,5);
