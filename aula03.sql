@@ -171,3 +171,26 @@ ORDER BY 1;
 SELECT *
 FROM tb_clientes
 ORDER BY 3;
+
+
+-- JOIN
+
+-- N = TABELAS ENVOLVIDAS NO RELATÓRIO
+-- JOIN = N - 1
+
+-- Consultas separadas
+SELECT nm_produto, id_tipo_produto
+FROM tb_produtos
+WHERE id_produto = 3;
+
+SELECT nm_tipo_produto
+FROM tb_tipos_produtos
+WHERE id_tipo_produto = 2;
+
+-- Usando EQUIJOIN
+
+SELECT tb_produtos.nm_produto,
+       tb_tipos_produtos.nm_tipo_produto
+FROM tb_produtos, tb_tipos_produtos
+WHERE tb_produtos.id_tipo_produto = tb_tipos_produtos.id_tipo_produto
+AND tb_produtos.id_produto = 3;
