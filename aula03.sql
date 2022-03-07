@@ -108,7 +108,6 @@ SELECT nome
 FROM tb_promocao
 WHERE nome LIKE '%\%%' ESCAPE '\';
 
-
 -- IN
 
 SELECT *
