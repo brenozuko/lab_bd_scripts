@@ -150,3 +150,41 @@ UNDEFINE v_id_produto; -- 3
 @ \home\oracle\teste_3.sql 6
 
 @ \home\oracle\teste_4.sql 6 19.99
+
+-- SELECIONA DROP TABLES DO OBJETO user_tables
+
+SELECT 'DROP TABLE ' || table_name || ';'
+FROM user_tables;
+
+-- EXERCICIO 1
+
+CREATE TABLE tb_teste (
+ID      INTEGER,
+valor   VARCHAR2(100)
+);
+
+BEGIN 
+FOR v_loop IN 1..100000 LOOP
+  INSERT INTO tb_teste(ID,valor)
+  VALUES(v_loop, 'DBA_' || v_loop);
+END LOOP;
+END;
+
+SELECT * FROM tb_teste ORDER BY 1;
+
+TRUNCATE TABLE tb_teste;
+
+SELECT * FROM tb_teste;
+
+
+-- EXERCICIO 2
+
+CREATE TABLE tb_cliente_teste(
+id_cliente      INTEGER,
+ds_cliente      VARCHAR2(40),
+nm_cliente      VARCHAR2(40),
+valor           NUMERIC,
+fg_ativo        INTEGER,
+PRIMARY KEY(id_cliente)
+);
+
