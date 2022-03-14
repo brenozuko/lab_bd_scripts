@@ -90,3 +90,25 @@ ORDER BY f.nome;
 SELECT * 
 FROM tb_tipos_produtos
 CROSS JOIN tb_produtos;
+
+-- VARIÁVEIS SQL
+
+-- INPUT: INTEGER
+SELECT id_produto, nm_produto, preco
+FROM tb_produtos
+WHERE id_produto = &v_id_produto;
+
+-- INPUT: 
+-- v_coluna = id_produto
+-- v_tabela = tb_produtos
+-- v_id_produto = 1
+
+SELECT nm_produto, &v_coluna
+FROM &v_tabela
+WHERE &v_coluna = &v_id_produto;
+
+-- Indica que a variável v_coluna é a mesma em todas as ocorrências da query
+-- Input apenas uma vez
+SELECT nm_produto, &&v_coluna
+FROM &v_tabela
+WHERE &&v_coluna = &v_id_produto;
