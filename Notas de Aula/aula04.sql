@@ -112,3 +112,31 @@ WHERE &v_coluna = &v_id_produto;
 SELECT nm_produto, &&v_coluna
 FROM &v_tabela
 WHERE &&v_coluna = &v_id_produto;
+
+-- Pré definição de variáveis com DEFINE
+
+DEFINE v_id_produto = 7;
+
+SELECT nm_produto, id_produto
+FROM tb_produtos
+WHERE id_produto = &v_id_produto;
+
+
+-- ACCEPT para especificar tipo
+
+ACCEPT v_id NUMBER FORMAT 99 PROMPT 'Entre com o ID';
+
+SELECT id_produto, nm_produto, preco
+FROM tb_produtos
+WHERE id_produto = &v_id;
+
+
+-- Fluxo de DEFINE e UNDEFINE:
+
+DEFINE v_id_produto = 7; --1
+
+SELECT nm_produto, id_produto -- 2 e 4
+FROM tb_produtos
+WHERE id_produto = &v_id_produto;
+
+UNDEFINE v_id_produto; -- 3
