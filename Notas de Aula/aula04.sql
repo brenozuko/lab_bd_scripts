@@ -5,7 +5,6 @@ WHERE f.id_gerente = g.id_funcionario
 ORDER BY f.nome;
 
 -- AUTOJOIN - inverter os predicados de chave primária e estrangeira gera inconsistência.
-
 SELECT f.nome || ' ' || f.sobrenome || ' trabalha para ' || g.nome
 FROM tb_funcionarios f, tb_funcionarios g
 WHERE g.id_gerente = f.id_funcionario
