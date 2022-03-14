@@ -141,8 +141,12 @@ WHERE id_produto = &v_id_produto;
 
 UNDEFINE v_id_produto; -- 3
 
+-- INVOCAÇÕES DE SCRIPT
+
 @ \home\oracle\teste_1.sql
 
 @ \home\oracle\teste_2.sql
 
 @ \home\oracle\teste_3.sql 6
+
+@ \home\oracle\teste_4.sql 6 19.99
