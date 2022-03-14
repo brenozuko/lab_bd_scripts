@@ -140,3 +140,9 @@ FROM tb_produtos
 WHERE id_produto = &v_id_produto;
 
 UNDEFINE v_id_produto; -- 3
+
+@ \home\oracle\teste_1.sql
+
+@ \home\oracle\teste_2.sql
+
+@ \home\oracle\teste_3.sql 6
