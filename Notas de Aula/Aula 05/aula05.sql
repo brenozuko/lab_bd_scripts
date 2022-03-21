@@ -1,3 +1,5 @@
+-- EXERCÍCIO 2 DE AULA
+
 CREATE TABLE tb_cliente_teste(
 id_cliente      INTEGER,
 ds_cliente      VARCHAR2(40),
@@ -94,3 +96,60 @@ manipula_dados(2, 'Cliente - Alterado hoje', 'Alterado hoje', 99.99, 1, 'U');
 -- opção deletar (opção = D)
 manipula_dados(1, NULL, NULL, NULL, NULL, 'D');
 END;
+
+
+-- FUNÇÔES SIMPLES
+
+-- ASCII e CHR
+
+SELECT ASCII('a'), ASCII('A'), ASCII('z'), ASCII('Z'), ASCII('O'), ASCII('9')
+FROM dual;
+
+SELECT CHR(97), CHR(65), CHR(122), CHR(90), CHR(48), CHR(57)
+FROM dual;
+
+-- CONCAT 
+
+SELECT CONCAT(nome,sobrenome)
+FROM tb_funcionarios;
+
+
+-- INITCAP - Converte a primeira letra em maiúsculo
+
+SELECT id_produto, INITCAP(ds_produto)
+FROM tb_produtos;
+
+-- INSTR
+
+-- Procura pela ocorrência da string 'Science'
+SELECT nm_produto, INSTR(nm_produto, 'Science')
+FROM tb_produtos
+WHERE id_produto = 1;
+
+-- Procura pela segunda ocorrência da letra 'e'
+SELECT nm_produto, INSTR(nm_produto, 'e', 1, 2)
+FROM tb_produtos
+WHERE id_produto = 1;
+
+-- LENGTH - retorna tamanho do valor da coluna
+SELECT nm_produto, LENGTH(nm_produto)
+FROM tb_produtos;
+
+-- UPPER e LOWER
+
+SELECT UPPER(nome), LOWER(sobrenome)
+FROM tb_funcionarios;
+
+-- RPAD e LPAD
+
+SELECT RPAD(nm_produto, 30, '.'), LPAD(preco, 8, '*.')
+FROM tb_produtos
+WHERE id_produto < 4;´
+
+-- LTRIM, RTRIM, TRIM
+
+SELECT
+  LTRIM('   Olá pessoal tudo joia?'),
+  RTRIM('Oi tudo bem!abcabc', 'abc'),
+  TRIM('0' FROM '0000Treinamento em Oracle!0000')
+FROM dual;
