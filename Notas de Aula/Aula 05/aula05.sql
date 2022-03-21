@@ -7,7 +7,8 @@ fg_ativo        INTEGER,
 PRIMARY KEY (id_cliente)
 );
 
-CREATE OR REPLACE
+
+create or replace
 PROCEDURE manipula_dados(
 p_id_cliente IN tb_cliente_teste.id_cliente%TYPE,
 p_descricao  IN tb_cliente_teste.ds_cliente%TYPE,
@@ -77,3 +78,19 @@ EXCEPTION
   WHEN OTHERS THEN
   ROLLBACK;
 END manipula_dados;
+
+
+SET serveroutput ON
+BEGIN
+-- opção inserir (opção = I)
+ manipula_dados(1, 'Cliente 1', 'Nome Cliente 1', 22.33,1,'I');
+
+-- opção inserir (opção = I)
+ manipula_dados(2, 'Cliente 2', 'Nome Cliente 2', 99.99,1,'I');
+
+-- opção alterar (opção = U)
+manipula_dados(2, 'Cliente - Alterado hoje', 'Alterado hoje', 99.99, 1, 'U');
+
+-- opção deletar (opção = D)
+manipula_dados(1, NULL, NULL, NULL, NULL, 'D');
+END;
