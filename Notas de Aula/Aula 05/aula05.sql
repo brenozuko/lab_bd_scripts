@@ -153,3 +153,9 @@ SELECT
   RTRIM('Oi tudo bem!abcabc', 'abc'),
   TRIM('0' FROM '0000Treinamento em Oracle!0000')
 FROM dual;
+
+-- NVL - converte valores nulos para uma string
+
+SELECT id_cliente, NVL(telefone, 'Telefone inexistente')
+FROM tb_clientes
+ORDER BY id_cliente DESC;
