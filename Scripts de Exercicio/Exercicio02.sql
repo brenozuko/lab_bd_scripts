@@ -286,6 +286,18 @@ INSERT INTO tb_funcao
 VALUES ('FI_MGR', 'Gerente Financeiro', 8200, 16000);
 
 INSERT INTO tb_funcao
+VALUES ('FI_ACCOUNT', 'Contador', 4200, 9000);
+
+INSERT INTO tb_funcao
+VALUES ('AC_MGR', 'Gerente de Contabilidade', 8200, 16000);
+
+INSERT INTO tb_funcao
+VALUES ('AC_ACCOUNT', 'Contador Público', 4200, 9000);
+
+INSERT INTO tb_funcao
+VALUES ('SA_MAN', 'Gerente de Vendas', 10000, 20000);
+
+INSERT INTO tb_funcao
 VALUES ('SA_REP', 'Representante de Vendas', 6000, 12000);
 
 INSERT INTO tb_funcao
@@ -320,3 +332,81 @@ VALUES ('PR_REP', 'Representante de Relações Pública', 4500, 10500);
 
 SELECT *
 FROM tb_funcao;
+
+-- NUMERO 6
+
+-- Inserção de dados table "tb_empregado"
+INSERT INTO tb_empregado
+VALUES
+(100, 'Steven', 'King', 'SKING', '515.123.4567', TO_DATE('17-JUN-1987', 'dd-MON-yyyy'),
+ 'AD_PRES', 24000.00, NULL, NULL, 90);
+
+INSERT INTO tb_empregado
+VALUES
+(101, 'Neena', 'Kochhar', 'NKOCHHAR', '515.123.4568', TO_DATE('21-SET-1989', 'dd-MON-yyyy')
+,'AD_VP', 17000.00, NULL, 100, 90);
+
+INSERT INTO tb_empregado
+VALUES
+(102, 'Lex', 'De Haan', 'LDEHAAN', '515.123.4569', TO_DATE('13-JAN-1993', 'dd-MON-yyyy')
+,'AD_VP', 17000.00, NULL, 100, 90);
+
+INSERT INTO tb_empregado
+VALUES
+(103, 'Alexander', 'Hunold', 'AHUNOLD', '590.423.4567', TO_DATE('03-JAN-1990', 'dd-MON-yyyy')
+,'IT_PROG', 9000.00, NULL, 102, 60);
+
+INSERT INTO tb_empregado
+VALUES
+( 104, 'Bruce', 'Ernst', 'BERNST', '590.423.4568', TO_DATE('21-MAI-1991', 'dd-MON-yyyy')
+, 'IT_PROG', 6000.00, NULL, 103, 60);
+
+INSERT INTO tb_empregado
+VALUES
+( 105, 'David', 'Austin', 'DAUSTIN', '590.423.4569', TO_DATE('25-JUN-1997', 'dd-MON-yyyy')
+, 'IT_PROG', 4800.00, NULL, 103, 60);
+
+INSERT INTO tb_empregado
+VALUES
+( 106, 'Valli', 'Pataballa', 'VPATABAL', '590.423.4560', TO_DATE('05-FEV-1998', 'dd-MON-yyyy')
+, 'IT_PROG', 4800.00, NULL, 103, 60);
+
+INSERT INTO tb_empregado
+VALUES
+( 107, 'Diana', 'Lorentz', 'DLORENTZ', '590.423.5567', TO_DATE('07-FEV-1999', 'dd-MON-yyyy')
+, 'IT_PROG', 4200.00, NULL, 103, 60);
+
+INSERT INTO tb_empregado
+VALUES
+( 108, 'Nancy', 'Greenberg', 'NGREENBE', '515.124.4569', TO_DATE('17-AGO-1994', 'dd-MON-yyyy')
+, 'FI_MGR', 12000.00, NULL, 101, 100);
+
+INSERT INTO tb_empregado
+VALUES
+( 109, 'Daniel', 'Faviet', 'DFAVIET', '515.124.4169', TO_DATE('16-AGO-1994', 'dd-MON-yyyy')
+, 'FI_ACCOUNT', 9000.00, NULL, 108, 100);
+
+INSERT INTO tb_empregado
+VALUES
+( 110, 'John', 'Chen', 'JCHEN', '515.124.4269', TO_DATE('28-SET-1997', 'dd-MON-yyyy')
+, 'FI_ACCOUNT', 8200.00, NULL, 108, 100);
+
+INSERT INTO tb_empregado
+VALUES
+( 111, 'Ismael', 'Sciarra', 'ISCIARRA', '515.124.4369', TO_DATE('30-SET-1997', 'dd-MON-yyyy')
+, 'FI_ACCOUNT', 7700.00, NULL, 108, 100);
+
+INSERT INTO tb_empregado
+VALUES
+( 112, 'Jose Manuel', 'Urman', 'JMURMAN', '515.124.4469', TO_DATE('07-MAR-1998', 'dd-MON-yyyy')
+, 'FI_ACCOUNT', 7800.00, NULL, 108, 100);
+
+INSERT INTO tb_empregado
+VALUES
+( 113, 'Luis', 'Popp', 'LPOPP', '515.124.4567', TO_DATE('07-DEZ-1999', 'dd-MON-yyyy')
+, 'FI_ACCOUNT', 6900.00, NULL, 108, 100);
+
+INSERT INTO tb_empregado
+VALUES
+( 114, 'Den', 'Raphaely', 'DRAPHEAL', '515.127.4561', TO_DATE('07-DEZ-1994', 'dd-MON-yyyy')
+, 'PU_MAN', 11000.00, NULL, 100, 30);
