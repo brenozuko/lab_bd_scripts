@@ -1,11 +1,11 @@
 -- EXERCÍCIO 1
 
 -- NÚMERO 1
-CREATE USER exercicios IDENTIFIED BY 123456;
+-- CREATE USER exercicios IDENTIFIED BY 123456;
 
-GRANT resource, connect TO exercicios;
+-- GRANT resource, connect TO exercicios;
 
-ALTER USER exercicios quota 100M on USERS;
+-- ALTER USER exercicios quota 100M on USERS;
 
 -- NÚMERO 2
 
