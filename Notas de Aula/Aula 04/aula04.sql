@@ -177,14 +177,3 @@ TRUNCATE TABLE tb_teste;
 SELECT * FROM tb_teste;
 
 
--- EXERCICIO 2
-
-CREATE TABLE tb_cliente_teste(
-id_cliente      INTEGER,
-ds_cliente      VARCHAR2(40),
-nm_cliente      VARCHAR2(40),
-valor           NUMERIC,
-fg_ativo        INTEGER,
-PRIMARY KEY(id_cliente)
-);
-
