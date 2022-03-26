@@ -152,7 +152,7 @@ CREATE TABLE tb_historico_funcao(
 id_empregado        NUMBER(6) CONSTRAINT nn_hist_emp_id_emp NOT NULL,
 data_inicio         DATE CONSTRAINT nn_hist_emp_dt_inicio NOT NULL,
 data_Termino        DATE CONSTRAINT nn_hist_emp_dt_termino NOT NULL,
-id_funcao           VARCHAR2(1) CONSTRAINT nn_hist_emp_id_funcao NOT NULL,
+id_funcao           VARCHAR2(10) CONSTRAINT nn_hist_emp_id_funcao NOT NULL,
 id_departamento     NUMBER(4),
 CONSTRAINT ck_hist_emp_data_intervalo CHECK(data_termino > data_inicio));
 
