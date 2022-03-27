@@ -91,7 +91,7 @@ NOCYCLE;
 
 CREATE TABLE tb_funcao(
 id_funcao     VARCHAR2(10),
-ds_funcao     VARCHAR2(35) CONSTRAINT nn_ds_funcao NOT NULL,
+ds_funcao     VARCHAR2(37) CONSTRAINT nn_ds_funcao NOT NULL,
 base_salario  NUMBER(8,2),
 teto_salario  NUMBER(8,2)
 );
