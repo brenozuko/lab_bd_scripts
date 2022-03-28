@@ -159,3 +159,12 @@ FROM dual;
 SELECT id_cliente, NVL(telefone, 'Telefone inexistente')
 FROM tb_clientes
 ORDER BY id_cliente DESC;
+
+
+-- NVL 2 -- retorna o primeiro valor caso x seja nulo, caso contrário retorna o segundo
+
+SELECT id_cliente, NVL2(telefone, 'Telefone existente', 'Telefone inexistente')
+FROM tb_clientes
+ORDER BY id_cliente DESC;
+
+
