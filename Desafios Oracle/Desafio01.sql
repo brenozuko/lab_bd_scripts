@@ -25,6 +25,49 @@ ORDER BY 1 ASC;
 -- MINHA RESOLUÇÃO
 SELECT nome, sobrenome 
 FROM tb_empregado
-WHERE LOWER(nome) LIKE 'e_____e'
+WHERE LOWER(nome) LIKE 'e_____e' -- Era importante colocar a %, falso positivo
 AND id_departamento = 80
 OR id_gerente = 148;
+
+
+-- SOLUÇÃO
+
+SELECT nome || ' ' || sobrenome
+FROM tb_empregado
+WHERE LOWER(nome) LIKE 'e_____e%'
+AND id_departamento = 80
+OR id_gerente = 148;
+
+
+-- EXERCÍCIO O3 
+
+-- MINHA RESOLUÇÃO
+
+SELECT NVL(g.nome, 'Os acionistas') || ' gerencia(m) ' || e.nome
+FROM tb_empregado g
+RIGHT OUTER JOIN tb_empregado e ON (g.id_empregado = e.id_gerente)
+ORDER BY g.nome DESC;
+
+
+-- SOLUÇÃO
+
+SELECT NVL(g.nome, 'Os acionistas') || ' gerencia(m) ' || e.nome
+FROM tb_empregado e
+LEFT OUTER JOIN tb_empregado g ON (e.id_gerente = g.id_empregado)
+ORDER BY g.nome DESC;
+
+
+-- EXERCÍCIO 04
+
+-- MINHA RESOLUÇÃO
+SELECT nome, sobrenome, SYSDATE - data_admissao AS "Dias trabalhados"
+FROM tb_empregado 
+WHERE id_departamento = 80
+AND SYSDATE - TO_DATE(data_admissao) > 5000;
+
+-- SOLUÇÃO
+
+SELECT sobrenome, ROUND((SYSDATE - data_admissao), 0) AS "Número de Dias Trabalhados"
+FROM tb_empregado
+WHERE id_departamento = 80
+AND ROUND((SYSDATE - data_admissao), 0) > 5000;
