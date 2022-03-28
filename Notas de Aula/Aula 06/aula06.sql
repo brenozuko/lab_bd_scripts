@@ -137,3 +137,31 @@ WHERE id_produto < 5;
 
 SELECT TO_NUMBER('970.13')
 FROM dual;
+
+SELECT TO_NUMBER('970.13') + 25.50
+FROM dual;
+
+SELECT TO_NUMBER('-$12,345.67', '$99,999.99')
+FROM dual;
+
+-- CAST
+
+SELECT 
+    CAST(12345.67 AS VARCHAR2(10)),
+    CAST('9A4F' AS RAW(2)),
+    CAST('01-DEC-2007' AS DATE),
+    CAST(12345.678 AS NUMBER(10,2))
+FROM dual;
+
+SELECT 
+    CAST(preco AS VARCHAR2(10)),
+    CAST(preco + 2 AS NUMBER(7,2)),
+    CAST(preco AS BINARY_DOUBLE)
+FROM tb_produtos
+WHERE id_produto = 1;
+
+-- REGEXP_LIKE
+
+SELECT id_cliente, nome, sobrenome, dt_nascimento
+FROM tb_clientes
+WHERE REGEXP_LIKE(TO_CHAR(dt_nascimento, 'YYYY'), '196[5-8]$');
