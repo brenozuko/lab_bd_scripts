@@ -90,7 +90,27 @@ SELECT id_produto, id_cliente
 FROM tb_compras
 GROUP BY id_produto, id_cliente;
 
+-- PROCESSANDO FUNÇÕES COM GROUP BY
 SELECT id_tipo_produto, COUNT(ROWID)
 FROM tb_produtos
 GROUP BY id_tipo_produto
 ORDER BY id_tipo_produto;
+
+-- COM AVG
+SELECT id_tipo_produto, AVG(preco)
+FROM tb_produtos
+GROUP BY id_tipo_produto
+ORDER BY id_tipo_produto;
+
+SELECT id_tipo_produto, AVG(preco)
+FROM tb_produtos
+GROUP BY id_tipo_produto
+ORDER BY id_tipo_produto;
+
+-- GROUP BY COM INNER JOIN
+SELECT p.id_tipo_produto, tp.nm_tipo_produto,  ROUND(AVG(p.preco), 2)
+FROM tb_produtos p
+INNER JOIN tb_tipos_produtos tp ON(p.id_tipo_produto = tp.id_tipo_produto)
+GROUP BY p.id_tipo_produto, tp.nm_tipo_produto
+ORDER BY p.id_tipo_produto;
+
