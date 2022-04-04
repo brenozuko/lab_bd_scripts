@@ -36,3 +36,61 @@ FROM tb_produtos;
 -- MÉDIA + 2
 SELECT AVG(preco + 2.00)
 FROM tb_produtos;
+
+SELECT AVG(DISTINCT preco)
+FROM tb_produtos;
+
+-- COUNT
+
+SELECT COUNT(id_produto)
+FROM tb_produtos;
+
+-- Não usar * - Utilize pseudo-coluna ROWID
+SELECT COUNT(ROWID)
+FROM tb_produtos;
+
+-- MAX E MIN - RETORNA VALORES MÁXIMO E MÍNIMO DE UMA COLUNA
+SELECT MAX(preco), MIN(preco)
+FROM tb_produtos;
+
+-- Seleciona o produto de maior preço com a subquery
+SELECT nm_produto, preco
+FROM tb_produtos
+WHERE preco = (SELECT MAX(preco) 
+               FROM tb_produtos);
+
+-- RETORNA O VALOR MÁXIMO DA STRING
+SELECT MAX(nm_produto), MIN(nm_produto)
+FROM tb_produtos;
+
+-- RETORNA O VALOR MÁXIMO DA DATA
+SELECT MAX(dt_nascimento), MIN(dt_nascimento)
+FROM tb_clientes;
+
+-- DESVIO PADRÃO
+SELECT STDDEV(preco)
+FROM tb_produtos;
+
+-- SOMATÓRIO
+SELECT SUM(preco)
+FROM tb_produtos;
+
+-- VARIÂNCIA
+SELECT VARIANCE(preco)
+FROM tb_produtos;
+
+-- GROUP BY - AGRUPA COLUNAS DO MESMO VALOR
+
+SELECT id_tipo_produto
+FROM tb_produtos
+GROUP BY id_tipo_produto;
+
+-- COM MÚLTIPLAS COLUNAS
+SELECT id_produto, id_cliente
+FROM tb_compras
+GROUP BY id_produto, id_cliente;
+
+SELECT id_tipo_produto, COUNT(ROWID)
+FROM tb_produtos
+GROUP BY id_tipo_produto
+ORDER BY id_tipo_produto;
