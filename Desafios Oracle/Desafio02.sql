@@ -42,3 +42,13 @@ SELECT RPAD(nome || ' ' || sobrenome, 18) || ' ' ||
        RPAD(' ', salario/1000+1, '*') FUNCIONARIOS_E_SEUS_SALARIOS
 FROM tb_empregado
 ORDER BY salario DESC;
+
+-- EXERCICIO 08
+
+-- MINHA RESOLUÇÃO
+SELECT 'O departamento ' || d.nm_departamento || ' possui ' || COUNT(e.ROWID) || ' empregado(s) alocado(s)'
+AS "Informação dos Deptos"
+FROM tb_departamento d
+INNER JOIN tb_empregado e ON(d.id_departamento = e.id_departamento)
+GROUP BY d.nm_departamento
+ORDER BY d.nm_departamento DESC;
