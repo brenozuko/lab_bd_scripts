@@ -52,3 +52,11 @@ FROM tb_departamento d
 INNER JOIN tb_empregado e ON(d.id_departamento = e.id_departamento)
 GROUP BY d.nm_departamento
 ORDER BY d.nm_departamento DESC;
+
+-- RESOLUÇÃO DE AULA
+SELECT 'O departamento ' || nm_departamento || ' possui ' || COUNT(1) || ' empregado(s) alocado(s)'
+AS "Informação dos Deptos"
+FROM tb_empregado e
+INNER JOIN tb_departamento d ON(e.id_departamento = d.id_departamento)
+GROUP BY nm_departamento
+ORDER BY nm_departamento DESC;
