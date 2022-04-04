@@ -37,3 +37,8 @@ FROM tb_empregado;
 
 -- EXERCICIO 07
 
+-- RESOLUÇÃO DE AULA
+SELECT RPAD(nome || ' ' || sobrenome, 18) || ' ' ||
+       RPAD(' ', salario/1000+1, '*') FUNCIONARIOS_E_SEUS_SALARIOS
+FROM tb_empregado
+ORDER BY salario DESC;
