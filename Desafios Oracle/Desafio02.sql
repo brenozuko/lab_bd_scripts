@@ -22,3 +22,18 @@ FROM tb_empregado e
 INNER JOIN tb_funcao f ON(e.id_funcao = f.id_funcao);
 
 @ \home\oracle\item_5.sql
+
+
+
+-- EXERCICIO 06
+
+-- minha resolução
+SELECT id_empregado || ', ' || nome || ', ' || sobrenome || ', ' ||
+       email || ', ' || telefone || ', ' || data_admissao || ', ' || data_admissao
+       || ', ' || id_funcao || ', ' || salario || ', ' || percentual_comissao || ', ' ||
+       id_departamento SAIDA
+FROM tb_empregado;
+
+
+-- EXERCICIO 07
+
