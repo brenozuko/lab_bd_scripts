@@ -195,7 +195,7 @@ SELECT
 FROM dual;
 
 
--- NUMTODSINTERVAL(x, tipo) -> retorna o intervalo dado um número e a unidade esperada
+-- NUMTODSINTERVAL(x, unidade_intervalo) -> retorna o intervalo dado um número e a unidade esperada
 
 SELECT
     NUMTODSINTERVAL(1.5, 'DAY'),
@@ -203,3 +203,10 @@ SELECT
     NUMTODSINTERVAL(5, 'MINUTE'),
     NUMTODSINTERVAL(10.123456789, 'SECOND')
 from dual;
+
+-- NUMTOYMINTERVAL(x, unidade_intervalo)
+-- Não é possível trazer 25% de meses pois estes não são exatos, arredonda para 3
+SELECT
+    NUMTOYMINTERVAL(1.5, 'YEAR'),
+    NUMTOYMINTERVAL(3.25, 'MONTH'),
+FROM dual;
