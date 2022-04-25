@@ -163,3 +163,26 @@ FROM dual;
 -- No primeiro semestre arredonda para o primeiro dia deste ano vigente
 SELECT ROUND(TO_DATE('Jan 03, 2013'), 'YYYY')
 FROM dual;
+
+-- ROUND com mês
+SELECT ROUND(TO_DATE('Mai 25, 2013'), 'MM')
+FROM dual;
+
+SELECT ROUND(TO_DATE('Mai 10, 2013'), 'MM')
+FROM dual;
+
+-- ROUND com hora
+
+SELECT TO_CHAR
+       (ROUND
+       (TO_DATE('Jul 03, 2013 19:45:26', 'MONTH DD, YYYY HH24:MI:SS'), 
+       'HH24'),
+       'MONTH DD, YYYY HH24:MI:SS')
+FROM dual;
+
+-- EXTRACT - extrai hora, dia, mês ou ano de um tipo DATE
+SELECT 
+    EXTRACT(YEAR FROM TO_DATE('Jul 03, 2013 19:45:26', 'MONTH DD, YYYY HH24:MI:SS')) AS YEAR,
+    EXTRACT(MONTH FROM TO_DATE('Jul 03, 2013 19:45:26', 'MONTH DD, YYYY HH24:MI:SS')) AS MONTH,
+    EXTRACT(DAY FROM TO_DATE('Jul 03, 2013 19:45:26', 'MONTH DD, YYYY HH24:MI:SS')) AS DAY
+FROM dual;
