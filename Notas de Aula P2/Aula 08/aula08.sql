@@ -65,3 +65,101 @@ FROM dual;
 -- Conversão para data e cast para char
 SELECT TO_CHAR(TO_DATE('05-FEV-1968'), 'MONTH DD, YYYY')
 FROM dual;
+
+-- Ao se omitir o segundo parâmetro NLS_DATE_FORMAT, o SGBD formata para o padrão. 
+SELECT TO_DATE('04-JUL-2013'), TO_DATE('04-JUL-13')
+FROM dual;
+
+-- Mais um exemplo de data 
+SELECT TO_DATE('Jul 04, 2013', 'MONTH DD, YYYY')
+FROM dual;
+
+-- Seleciona padrões NLS
+SELECT *
+FROM nls_session_parameters;
+
+-- Altera o NLS_DATE_FORMAT
+ALTER SESSION SET NLS_DATE_FORMAT='Mon/dd/yyyy';
+
+-- Exibe o valor da sessão alterada
+SELECT TO_DATE('7.4.13', 'MM.DD.YY')
+FROM dual;
+
+-- ** FORMATAR DATA E HORA COM TO_CHAR **
+
+-- Inserção de data com hora
+
+INSERT INTO tb_clientes(id_cliente, nome, sobrenome, dt_nascimento, telefone, fg_ativo)
+VALUES (
+    10,
+    'Nome',
+    'Sobrenome',
+    TO_DATE('Jul 04, 2013 19:32:36', 'MONTH DD, YYYY HH24:MI:SS'), 
+    '800-555-1215',
+    1);
+
+-- Apenas a nova inserção retorna o horário
+SELECT id_cliente,
+       TO_CHAR(dt_nascimento, 'DD-MON-YYYY HH24:MI:SS')
+FROM tb_clientes
+ORDER BY id_cliente;
+
+ROLLBACK;
+
+-- Combinação de TO_DATE e TO_CHAR para trazer parte específica da hora
+
+SELECT TO_CHAR(TO_DATE('Jul 04, 2013 19:32:36', 'MONTH DD, YYYY HH24:MI:SS'),
+             'HH24:MI:SS')
+FROM dual;
+
+-- Utilizando o padrão YY -> será considerado o século atual o que pode gerar inconsistências
+-- 75 deveria ser 1975 e retorna 2075
+SELECT 
+    TO_CHAR(TO_DATE('Jul 04, 15', 'MONTH DD, YY'), 'MONTH DD, YYYY'),
+    TO_CHAR(TO_DATE('Jul 04, 75', 'MONTH DD, YY'), 'MONTH DD, YYYY')
+FROM dual;
+
+-- Substituindo por RR conseguimos tratar essa inconsistência
+SELECT 
+    TO_CHAR(TO_DATE('Jul 04, 15', 'MONTH DD, RR'), 'MONTH DD, YYYY'),
+    TO_CHAR(TO_DATE('Jul 04, 75', 'MONTH DD, RR'), 'MONTH DD, YYYY')
+FROM dual;
+
+-- FUNÇÕES DE DATA
+
+-- ADD_MONTHS(x, y) - Adiciona um número de meses a uma data
+SELECT ADD_MONTHS('Jul 01, 2013', 13)
+FROM dual;
+
+-- Se y for negativo, subtrai os meses
+SELECT ADD_MONTHS('Jul 01, 2013', -13)
+FROM Dual;
+
+-- LAST_DAY(x) - Retorna a data do último dia do mês data inserida
+SELECT LAST_DAY('Jul 01, 2013')
+FROM dual;
+
+-- MONTHS_BETWEEN(x) - diferença de meses entre x e y
+-- Se x ocorre antes de y, o número retornado é negativo
+SELECT MONTHS_BETWEEN('Jul 03, 2013', 'Mai 01, 2011')
+FROM dual;
+
+-- NEXT_DAY(x, dia)
+-- Retorna a data do próximo dia depois de "x"
+
+-- Sunday = 1; Monday = 2; Tuesday = 3....
+SELECT NEXT_DAY('Jul 03, 2013', 1)
+FROM DUAL;
+
+SELECT NEXT_DAY(SYSDATE, 1)
+FROM DUAL;
+
+-- ROUND(x, [unidade]) -> arredonda para o dia mais próximo
+
+-- No segundo semestre arredonda para o primeiro dia do próximo ano
+SELECT ROUND(TO_DATE('Jul 03, 2013'), 'YYYY')
+FROM dual;
+
+-- No primeiro semestre arredonda para o primeiro dia deste ano vigente
+SELECT ROUND(TO_DATE('Jan 03, 2013'), 'YYYY')
+FROM dual;
