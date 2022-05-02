@@ -112,3 +112,35 @@ SELECT id_tipo_produto, nm_tipo_produto
 FROM tb_tipos_produtos
 WHERE id_tipo_produto NOT IN (SELECT NVL(id_tipo_produto, 0)
                               FROM tb_produtos);
+
+
+-- SUBQUERIES ANINHADAS
+
+SELECT id_tipo_produto, AVG(preco)
+FROM tb_produtos
+GROUP BY id_tipo_produto
+HAVING AVG(preco) < (SELECT MAX(AVG(preco))
+                     FROM tb_produtos
+                     WHERE id_produto IN (SELECT id_produto
+                                          FROM tb_compras
+                                          WHERE quantidade > 1)
+                     GROUP BY id_tipo_produto)
+ORDER BY id_tipo_produto;
+
+-- UPDATE USANDO SUBQUERY
+
+UPDATE tb_funcionarios
+SET salario = (SELECT AVG(teto_salario)
+               FROM tb_grades_salarios)
+WHERE id_funcionario = 4;
+
+ROLLBACK;
+
+-- DELETE USANDO SUBQUERY
+--Retorna erro pois fere a integridade referencial
+DELETE
+FROM tb_funcionarios
+WHERE salario > (SELECT AVG(teto_salario)
+                 FROM tb_grades_salarios);
+
+ROLLBACK;
