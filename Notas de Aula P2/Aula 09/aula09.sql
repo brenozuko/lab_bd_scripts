@@ -41,3 +41,74 @@ SELECT id_funcionario, nome, salario
 FROM tb_funcionarios
 WHERE salario < ANY(SELECT base_salario
                     FROM tb_grades_salarios);
+
+
+-- SUBQUERY ALL -- Compara com o maior salário da lista retornada
+
+SELECT id_funcionario, nome, salario
+FROM tb_funcionarios
+WHERE salario > ALL(SELECT teto_salario
+                    FROM tb_grades_salarios);
+
+-- SUBQUERY IN QUE RETORNAM VÁRIAS COLUNAS
+
+SELECT id_produto, id_tipo_produto, nm_produto, preco
+FROM tb_produtos
+WHERE (id_tipo_produto, preco) IN (SELECT id_tipo_produto, MIN(preco)
+                                  FROM tb_produtos
+                                  GROUP BY id_tipo_produto);
+
+
+-- SUBQUERIES CORRELACIONADAS -> Dependem da consulta externa
+                                  
+SELECT id_produto, id_tipo_produto, nm_produto, preco
+FROM tb_produtos externa
+WHERE preco > (SELECT AVG(preco)
+               FROM tb_produtos interna
+               WHERE interna.id_tipo_produto = externa.id_tipo_produto);
+
+-- EXISTS E NOT EXISTS -> Mais performático pois não há comparação de valores
+
+-- Seleciona todos os funcionarios que gerenciam pessoas
+
+SELECT id_funcionario, nome, sobrenome
+FROM tb_funcionarios externa
+WHERE EXISTS (SELECT id_funcionario
+              FROM tb_funcionarios interna
+              WHERE interna.id_gerente = externa.id_funcionario);
+
+SELECT id_funcionario, nome, sobrenome
+FROM tb_funcionarios externa
+WHERE EXISTS (SELECT 1
+              FROM tb_funcionarios interna
+              WHERE interna.id_gerente = externa.id_funcionario); 
+
+SELECT id_produto, nm_produto
+FROM tb_produtos externa
+WHERE NOT EXISTS (SELECT 1
+                  FROM tb_compras interna
+                  WHERE interna.id_produto = externa.id_produto);
+
+-- NOT IN vs NOT EXISTS
+
+SELECT id_tipo_produto, nm_tipo_produto
+FROM tb_tipos_produtos externa 
+WHERE NOT EXISTS (SELECT 1
+                  FROM tb_produtos interna
+                  WHERE interna.id_tipo_produto = externa.id_tipo_produto);
+
+
+
+-- RETORNA ERRO
+SELECT id_tipo_produto, nm_tipo_produto
+FROM tb_tipos_produtos 
+WHERE id_tipo_produto NOT IN (SELECT 1
+                      FROM tb_produtos
+                      WHERE interna.id_tipo_produto = externa.id_tipo_produto);
+                                        
+-- CORREÇÃO USANDO NVL
+
+SELECT id_tipo_produto, nm_tipo_produto
+FROM tb_tipos_produtos
+WHERE id_tipo_produto NOT IN (SELECT NVL(id_tipo_produto, 0)
+                              FROM tb_produtos);
