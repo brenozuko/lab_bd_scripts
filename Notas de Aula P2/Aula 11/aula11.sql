@@ -166,3 +166,32 @@ VALUES
 (16,1,'Física', 'Livro sobre Física', 39.95,1);
 
 COMMIT;
+
+EXECUTE DBMS_FLASHBACK.ENABLE_AT_SYSTEM_CHANGE_NUMBER(:scn_atual);
+
+SELECT *
+FROM tb_produtos
+WHERE id_produto = 16;
+
+EXECUTE DBMS_FLASHBACK.DISABLE();
+
+-- CRIANDO, EXCLUINDO E REVERTENDO O MESMO OBJETO ATRAVÉS DO USO DE FLASHBACK
+
+CREATE TABLE tb_teste(
+ID        INTEGER,
+valor     VARCHAR2(100)
+);
+
+BEGIN 
+    FOR v_loop IN 1..100 LOOP
+    INSERT INTO tb_teste(id,valor)
+    VALUES (v_loop, 'DBA_' || v_loop);
+    END LOOP;
+END;
+
+SELECT *
+FROM tb_teste;
+
+DROP TABLE tb_teste; -- equívoco
+
+FLASHBACK TABLE tb_teste TO BEFORE DROP;
