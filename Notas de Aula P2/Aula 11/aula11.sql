@@ -105,8 +105,7 @@ WHERE id_produto IN (4,6);
 -- Gravadores só bloqueiam gravadores quando eles tentem modificar a mesma linha
 -- Exceção: gravador tenta alterar a mesma linha, porém registros diferentes
 
--- FLASHBACK
-
+-- FLASHBACK - BASEADO EM TEMPO
 
 SELECT id_produto, nm_produto, preco
 FROM tb_produtos
@@ -146,3 +145,24 @@ EXECUTE DBMS_FLASHBACK.DISABLE();
 SELECT id_produto, nm_produto, preco
 FROM tb_produtos
 WHERE id_produto <= 5;
+
+-- FLASHBACK BASEADO EM SCN
+
+VARIABLE scn_atual NUMBER;
+
+EXECUTE :scn_atual := DBMS_FLASHBACK.GET_SYSTEM_CHANGE_NUMBER();
+
+PRINT scn_atual;
+
+-- SCN ATUAL: 13062996
+
+INSERT INTO tb_produtos(id_produto,
+                        id_tipo_produto,
+                        nm_produto,
+                        ds_produto,
+                        preco,
+                        fg_ativo)
+VALUES
+(16,1,'Física', 'Livro sobre Física', 39.95,1);
+
+COMMIT;
