@@ -107,3 +107,42 @@ WHERE id_produto IN (4,6);
 
 -- FLASHBACK
 
+
+SELECT id_produto, nm_produto, preco
+FROM tb_produtos
+WHERE id_produto <= 5;
+
+-- ORIGINAL
+-- Produto 1 - 40
+-- Produto 2 - 35
+-- Produto 3 - 25,99
+-- Produto 4 - 16,74
+
+UPDATE tb_produtos
+  SET preco = preco * 0.75
+WHERE id_produto <= 5;
+
+COMMIT;
+
+SELECT id_produto, nm_produto, preco
+FROM tb_produtos
+WHERE id_produto <= 5;
+
+-- ATUALIZADO
+-- Produto 1 - 30
+-- Produto 2 - 26,25
+-- Produto 3 - 19,49
+-- Produto 4 - 12,56
+
+-- 24 * 60 = 1440
+EXECUTE DBMS_FLASHBACK.ENABLE_AT_TIME(SYSDATE - 10/1440);
+
+SELECT id_produto, nm_produto, preco
+FROM tb_produtos
+WHERE id_produto <= 5;
+
+EXECUTE DBMS_FLASHBACK.DISABLE();
+
+SELECT id_produto, nm_produto, preco
+FROM tb_produtos
+WHERE id_produto <= 5;
