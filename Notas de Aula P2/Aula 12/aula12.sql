@@ -128,3 +128,58 @@ INSERT INTO tb_status_encomenda_2(id_status_encomenda,
                                   modificado_por)
 VALUES
 (2, 'PENDENTE', '01-MAI-2013', 1);
+
+-- MODIFY CONSTRAINT NOT NULL
+ALTER TABLE tb_status_encomenda_2
+MODIFY status CONSTRAINT nn_status_encomenda_2 NOT NULL;
+
+ALTER TABLE tb_status_encomenda_2
+MODIFY modificado_por
+  CONSTRAINT nn_status_encomenda_2_mod NOT NULL;
+
+-- DELETANDO COLUNA E CRIANDO FOREIGN KEY
+ALTER TABLE tb_status_encomenda_2
+DROP COLUMN modificado_por;
+
+ALTER TABLE tb_status_encomenda_2
+ADD CONSTRAINT fk_status_enc_2_modif_por
+    modificado_por REFERENCES tb_funcionarios(id_funcionario);
+
+-- DELETANDO COLUNA E CRIANDO FOREIGN KEY COM DROP CASCADE
+ALTER TABLE tb_status_encomenda_2
+DROP COLUMN modificado_por;
+
+ALTER TABLE tb_status_encomenda_2
+  ADD CONSTRAINT fk_status_enc_2_modif_por
+    modificado_por REFERENCES tb_funcionarios(id_funcionario)
+    ON DELETE CASCADE;
+
+-- AO DELETAR COLOQUE NULL
+ALTER TABLE tb_status_encomenda_2
+  ADD CONSTRAINT fk_status_enc_2_modif_por
+    modificado_por REFERENCES tb_funcionarios(id_funcionario)
+    ON DELETE SET NULL;
+
+-- ALTER UNIQUE
+ALTER TABLE tb_status_encomenda_2
+ADD CONSTRAINT uq_status_encomenda_2_status UNIQUE(status);
+
+-- DROP CONSTRAINT
+ALTER TABLE tb_status_encomenda_2
+DROP CONSTRAINT uq_status_encomenda_2_status;
+
+-- DISABLE CONSTRAINT
+ALTER TABLE tb_status_encomenda_2
+ADD CONSTRAINT uq_status_encomenda_2_status
+UNIQUE(status) DISABLE;
+
+ALTER TABLE tb_status_encomenda_2
+DISABLE CONSTRAINT nn_status_encomenda_2;
+
+-- ENABLE CONSTRAINT
+ALTER TABLE tb_status_encomenda_2
+ENABLE CONSTRAINT uq_status_encomenda_2_status;
+
+-- NÃO VALIDA DADOS JÁ INSERIDOS PELA REGRA DA CONSTRAINT
+ALTER TABLE tb_status_encomenda_2
+ENABLE NOVALIDATE CONSTRAINT uq_status_encomenda_2_status;
