@@ -19,7 +19,25 @@ CREATE TABLE tb_teste_1(
 id_teste        INTEGER
 );
 
-
+-- CHECANDO A USER_AUDIT_TRAIL
 SELECT username, extended_timestamp, audit_option
 FROM user_audit_trail
 WHERE audit_option = 'CREATE TABLE';
+
+
+SELECT username, extended_timestamp, owner, obj_name, action_name
+FROM user_audit_trail
+WHERE action_name = 'CREATE TABLE'
+ORDER BY 2 DESC;
+
+AUDIT INSERT TABLE,
+      UPDATE TABLE,
+      DELETE TABLE BY loja, fernando;
+      
+AUDIT SELECT ON loja.tb_produtos;
+
+AUDIT ALL ON loja.tb_funcionarios;
+
+-- CHECA QUANDO AS INSTRUÇÕES SÃO BEM E MAL SUCEDIDAS
+AUDIT UPDATE TABLE BY fernando WHENEVER NOT SUCCESSFUL;
+AUDIT INSERT TABLE WHENEVER NOT SUCCESSFUL;
