@@ -225,3 +225,6 @@ WHERE table_name = 'TB_STATUS_ENCOMENDA_3';
 SELECT *
 FROM user_col_comments
 WHERE table_name = 'TB_STATUS_ENCOMENDA_3';
+
+-- TRUNCATE
+TRUNCATE TABLE tb_status_encomenda_3;
