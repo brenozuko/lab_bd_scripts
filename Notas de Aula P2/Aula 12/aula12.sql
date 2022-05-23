@@ -1,0 +1,25 @@
+-- CONECTADO COMO SYSTEM
+GRANT CREATE ROLE TO loja;
+GRANT CREATE ROLE TO loja WITH ADMIN OPTION;
+
+-- CONECTADO COMO LOJA -- to be continued
+
+
+-- AUDITORIA
+
+-- CONECTADO COMO SYSTEM - CONCEDE AUDITORIA A LOJA
+GRANT AUDIT SYSTEM TO loja;
+GRANT AUDIT ANY TO loja;
+
+-- CONECTADO COMO LOJA
+
+AUDIT CREATE TABLE;
+
+CREATE TABLE tb_teste_1(
+id_teste        INTEGER
+);
+
+
+SELECT username, extended_timestamp, audit_option
+FROM user_audit_trail
+WHERE audit_option = 'CREATE TABLE';
