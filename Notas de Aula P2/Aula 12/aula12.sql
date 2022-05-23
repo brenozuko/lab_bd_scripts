@@ -183,3 +183,45 @@ ENABLE CONSTRAINT uq_status_encomenda_2_status;
 -- NÃO VALIDA DADOS JÁ INSERIDOS PELA REGRA DA CONSTRAINT
 ALTER TABLE tb_status_encomenda_2
 ENABLE NOVALIDATE CONSTRAINT uq_status_encomenda_2_status;
+
+-- DEFERRABLE - QUANDO A CHECAGEM DA CONSTRAINT PODE SER POSTERGADA PARA O COMMIT
+ALTER TABLE tb_status_encomenda_2
+DROP CONSTRAINT uq_Status_encomenda_2_status;
+
+ALTER TABLE tb_status_encomenda_2
+ADD CONSTRAINT uq_status_encomenda_2_status UNIQUE(status)
+DEFERRABLE INITIALLY DEFERRED;
+
+-- CATÁLOGOS DE CONSTRAINTS E COLUNAS
+SELECT constraint_name,
+       constraint_type,
+       status,
+       deferrable,
+       deferred
+FROM user_constraints
+WHERE table_name = 'TB_STATUS_ENCOMENDA_2';
+
+SELECT constraint_name,
+       column_name
+FROM user_cons_columns
+WHERE table_name = 'TB_STATUS_ENCOMENDA_2'
+ORDER BY constraint_name;
+
+-- RENAME
+RENAME tb_status_encomenda_2 TO tb_status_encomenda_3;
+
+-- COMMENT
+COMMENT ON TABLE tb_status_encomenda_3 IS
+'tb_status_encomenda_3 armazena o estado de um pedido';~
+
+COMMENT ON COLUMN
+tb_status_encomenda_3.ultima_modificacao IS
+'ultima_modificacao armazena a data e hora da ultima modificação do pedido';
+
+SELECT *
+FROM user_tab_comments
+WHERE table_name = 'TB_STATUS_ENCOMENDA_3';
+
+SELECT *
+FROM user_col_comments
+WHERE table_name = 'TB_STATUS_ENCOMENDA_3';
