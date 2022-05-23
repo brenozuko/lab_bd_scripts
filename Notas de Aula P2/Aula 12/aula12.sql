@@ -87,3 +87,44 @@ SELECT column_name, data_type, data_length,
        data_precision, data_scale
 FROM user_tab_columns
 WHERE table_name = 'TB_PRODUTOS';
+
+-- ALTER
+-- ADD
+
+-- ADD INTEGER
+ALTER TABLE tb_status_encomenda_2
+ADD modificado_por INTEGER;
+
+-- ADD COM DEFAULT
+ALTER TABLE tb_status_encomenda_2
+ADD criado_inicialmente DATE DEFAULT SYSDATE NOT NULL;
+
+-- ADD COLUNA VIRTUAL
+ALTER TABLE tb_grades_salarios
+ADD (media_salario AS ((base_salario + teto_salario)/2));
+
+-- MODIFY
+
+ALTER TABLE tb_status_encomenda_2
+MODIFY status VARCHAR2(15);
+
+-- É permitido reduzir o tamanho de uma coluna, desde que nenhuma tupla esteja na tabela;
+
+ALTER TABLE tb_status_encomenda_2
+MODIFY id_status_encomenda  NUMBER(5);
+
+ALTER TABLE tb_status_encomenda_2
+MODIFY ultima_modificacao DEFAULT SYSDATE - 1;
+
+-- ADD CONSTRAINT CHECK
+ALTER TABLE tb_status_encomenda_2
+ADD CONSTRAINT ck_status_encomenda_2
+  CHECK(status IN('COLOCADO', 'PENDENTE', 'ENVIADO'));
+
+-- TESTANDO O CHECK
+INSERT INTO tb_status_encomenda_2(id_status_encomenda,
+                                  status,
+                                  ultima_modificacao,
+                                  modificado_por)
+VALUES
+(2, 'PENDENTE', '01-MAI-2013', 1);
