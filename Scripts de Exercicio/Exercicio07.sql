@@ -35,7 +35,7 @@ ORDER BY g.nome DESC;~
 
 -- QUESTÃO 5
 
-CREATE OR REPLACE PROCEDURE sp_get_emp(p_id IN integer)
+CREATE OR REPLACE PROCEDURE sp_get_emp(p_id IN INTEGER)
 AS
 v_nome_completo            VARCHAR2(500);
 v_ds_funcao                VARCHAR2(500);
@@ -58,6 +58,7 @@ ELSE
   DBMS_OUTPUT.PUT_LINE('Empregado ' || p_id || ' não localizado!');
 END IF;
 END sp_get_emp;
+
 
 SET serveroutput ON
 BEGIN
