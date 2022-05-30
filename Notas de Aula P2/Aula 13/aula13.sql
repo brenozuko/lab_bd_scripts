@@ -193,3 +193,58 @@ INSERT INTO view_produtos_baratos_2(id_produto, id_tipo_produto,
                                     nm_produto, preco)
 VALUES
 (53,1,'Submarino', 19.50);
+
+-- VIEW WITH READ ONLY
+
+CREATE VIEW view_produtos_baratos_3 AS
+SELECT *
+FROM tb_produtos
+WHERE preco < 15.00
+WITH READ ONLY CONSTRAINT view_prod_baratos_3_read_only;
+
+-- RETORNA ERRO
+
+INSERT INTO view_produtos_baratos_3(id_produto, id_tipo_produto,
+                                    nm_produto, preco)
+VALUES
+(34,1, 'E-Book Ms Project', 19.50);
+
+-- CHECA CATÁLOGO DAS VIEWS
+SELECT view_name, text_length, text
+FROM user_views
+ORDER BY view_name;
+
+-- CHECA CATÁLOGO DE CONSTRAINTS DAS VIEWS
+SELECT constraint_name, constraint_type, status, deferrable, deferred
+FROM user_constraints
+WHERE table_name IN ('VIEW_PRODUTOS_BARATOS_2',
+                     'VIEW_PRODUTOS_BARATOS_3')
+ORDER BY constraint_name;
+
+-- VIEWS COMPLEXAS - QUE REALIZA JUNÇÕES OU EXECUTA FUNÇÕES, UTILIZA DISTINCT, FUNÇÕES, ETC
+
+CREATE VIEW view_tipos_e_produtos AS
+SELECT p.id_produto, p.nm_produto nome_produto,
+       tp.nm_tipo_produto nome_tipo_produto, p.preco
+FROM tb_produtos p
+FULL OUTER JOIN tb_tipos_produtos tp
+USING (id_tipo_produto)
+ORDER BY p.id_produto;
+
+SELECT *
+FROM view_tipos_e_produtos;
+
+CREATE VIEW view_sarios_funcionarios AS 
+SELECT f.nome, f.sobrenome, f.cargo, f.salario, gs.id_salario
+FROM tb_funcionarios f
+INNER JOIN tb_grades_salarios gs
+ON f.salario BETWEEN gs.base_salario AND gs.teto_salario
+ORDER BY gs.id_salario;
+
+CREATE VIEW view_media_produtos AS
+SELECT id_tipo_produto, AVG(preco) media_preco
+FROM tb_produtos
+WHERE preco < 15.00
+GROUP BY id_tipo_produto
+HAVING AVG(preco) > 13.00
+ORDER BY id_tipo_produto;
