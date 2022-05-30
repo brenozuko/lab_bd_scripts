@@ -132,3 +132,64 @@ CREATE VIEW view_produtos_baratos AS
 SELECT *
 FROM tb_produtos
 WHERE preco < 15.00;
+
+
+CREATE VIEW view_funcionarios AS
+SELECT id_funcionario, id_gerente,
+       nome, sobrenome, cargo, fg_ativo
+FROM tb_funcionarios;
+
+SELECT *
+FROM view_produtos_baratos;
+
+SELECT *
+FROM view_funcionarios;
+
+-- DML em VIEWS
+
+INSERT INTO view_produtos_baratos(id_produto, id_tipo_produto,
+                                  nm_produto, preco, fg_ativo)
+VALUES
+(33, 1, 'DVD-R', 13.50, 1);
+
+
+SELECT id_produto, nm_produto. preco
+FROM view_produtos_baratos
+WHERE id_produto = 33;
+
+
+-- NÃO APRESENTA RESULTADO NA VIEW, POR FERIR A RESTRIÇÃO
+INSERT INTO view_produtos_baratos(id_produto, id_tipo_produto,
+                                  nm_produto, preco, fg_ativo)
+VALUES
+(43, 1, 'Mouse Optico', 16.50, 1);
+
+
+SELECT id_produto, nm_produto, preco
+FROM view_produtos_baratos
+WHERE id_produto = 43;
+
+-- NULIFICA VALORES NÃO PASSADOS 
+INSERT INTO view_funcionarios(id_funcionario, id_gerente, nome,
+                              sobrenome, cargo)
+VALUES
+(100, 1, 'Jefferson', 'Mendes', 'DBA');
+
+SELECT id_funcionario, nome, sobrenome, salario
+FROM tb_funcionarios
+WHERE id_funcionario = 100;
+
+
+-- WITH CHECK OPTION - NÃO PERMITE A INSERÇÃO QUE VIOLA A RESTRIÇÃO
+
+CREATE VIEW view_produtos_baratos_2 AS
+SELECT *
+FROM tb_produtos
+WHERE preco < 15.00
+WITH CHECK OPTION CONSTRAINT view_produtos_baratos_2_preco;
+
+-- ERRO ORA-01402
+INSERT INTO view_produtos_baratos_2(id_produto, id_tipo_produto,
+                                    nm_produto, preco)
+VALUES
+(53,1,'Submarino', 19.50);
