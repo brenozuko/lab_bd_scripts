@@ -97,3 +97,38 @@ ON tb_clientes (UPPER(sobrenome));
 
 -- CONECTADO COMO SYSTEM - PERMITE A INDEXAÇÃO BASEADA EM FUNÇÃO
 ALTER SYSTEM SET QUERY_REWRITE_ENABLED = TRUE;
+
+-- Verificando o catálogo de índices
+
+SELECT index_name, table_name, uniqueness, status
+FROM user_indexes
+WHERE table_name IN ('TB_CLIENTES', 'TB_FUNCIONARIOS')
+ORDER BY index_name;
+
+-- Verificando o catálogo de colunas de índices
+
+SELECT index_name, table_name, column_name
+FROM user_ind_columns
+WHERE table_name IN ('TB_CLIENTES', 'TB_FUNCIONARIOS')
+ORDER BY index_name;
+
+-- ALTER INDEX
+ALTER INDEX idx_clientes_telefone
+RENAME TO idx_clientes_telefone_nr;
+
+-- DROP INDEX
+DROP INDEX idx_clientes_telefone_nr;
+
+-- VISÕES
+-- VISÕES NUNCA ARMAZENAM TUPLAS, APENAS AS TABELAS DE BASE
+
+-- conectado como system
+
+GRANT CREATE VIEW TO loja;
+
+-- CRIANDO A VIEW
+
+CREATE VIEW view_produtos_baratos AS
+SELECT *
+FROM tb_produtos
+WHERE preco < 15.00;
