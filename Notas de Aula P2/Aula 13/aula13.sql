@@ -76,3 +76,24 @@ WHERE sobrenome = 'Brown';
 -- indexação de sobrenome
 CREATE INDEX idx_clientes_sobrenome
 ON tb_clientes(sobrenome);
+
+-- INDEXAÇÃO ÚNICA
+CREATE UNIQUE INDEX idx_clientes_telefone
+ON tb_clientes(telefone);
+
+-- INDICE COMPOSTO
+CREATE INDEX idx_func_nome_sobre
+ON tb_funcionarios(nome, sobrenome);
+
+
+-- Indice baseado em função
+SELECT nome, sobrenome
+FROM tb_clientes
+WHERE UPPER(sobrenome) = 'BROWN';
+
+
+CREATE INDEX idx_funcao_clientes_sobrenome
+ON tb_clientes (UPPER(sobrenome));
+
+-- CONECTADO COMO SYSTEM - PERMITE A INDEXAÇÃO BASEADA EM FUNÇÃO
+ALTER SYSTEM SET QUERY_REWRITE_ENABLED = TRUE;
