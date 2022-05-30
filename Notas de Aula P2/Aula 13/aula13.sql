@@ -248,3 +248,25 @@ WHERE preco < 15.00
 GROUP BY id_tipo_produto
 HAVING AVG(preco) > 13.00
 ORDER BY id_tipo_produto;
+
+-- CONSULTANDO A VIEW
+
+SELECT *
+FROM view_media_produtos;
+
+-- ALTERANDO O CORPO DA VIEW
+
+CREATE OR REPLACE VIEW view_media_produtos AS
+SELECT id_tipo_produto, AVG(preco) media_preco
+FROM tb_produtos
+WHERE preco < 12.00
+GROUP BY id_tipo_produto
+HAVING AVG(preco) > 11.00
+ORDER BY id_tipo_produto;
+
+-- REMOVENDO CONSTRAINT
+
+ALTER VIEW view_produtos_baratos_2
+DROP CONSTRAINT view_produtos_baratos_2_preco;
+
+DROP VIEW view_produtos_baratos_2;
