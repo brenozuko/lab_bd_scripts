@@ -64,3 +64,15 @@ INCREMENT BY 2;
 
 -- DROPANDO SEQUENCIA
 DROP SEQUENCE seq_teste_3;
+
+-- INDICES
+
+-- BUSCA COMUM - SEM INDEXAÇÃO
+
+SELECT *
+FROM tb_clientes
+WHERE sobrenome = 'Brown';
+
+-- indexação de sobrenome
+CREATE INDEX idx_clientes_sobrenome
+ON tb_clientes(sobrenome);
