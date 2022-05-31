@@ -19,6 +19,18 @@ WHERE e.salario =  (SELECT MIN(salario)
 AND g.id_empregado IS NOT NULL
 ORDER BY e.salario DESC;
 
+-- Questão 04
+
+SELECT COUNT(id_empregado) "Total empregados", TO_CHAR(data_admissao, 'YYYY')
+FROM tb_empregado
+GROUP BY TO_CHAR(data_admissao, 'YYYY')
+HAVING TO_CHAR(data_admissao, 'YYYY') IN ('1990', '1991', '1992', '1993');
 
 
-
+SELECT
+(SELECT COUNT(*) FROM tb_empregado) AS "total de empregados",
+(SELECT COUNT(*) FROM tb_empregado WHERE TO_CHAR(data_admissao,'YYYY') = '1990') AS "contratados em 1990",
+(SELECT COUNT(*) FROM tb_empregado WHERE TO_CHAR(data_admissao,'YYYY') = '1991') AS "contratados em 1991",
+(SELECT COUNT(*) FROM tb_empregado WHERE TO_CHAR(data_admissao,'YYYY') = '1992') AS "contratados em 1992",
+(SELECT COUNT(*) FROM tb_empregado WHERE TO_CHAR(data_admissao,'YYYY') = '1993') AS "contratados em 1993"
+FROM dual;
