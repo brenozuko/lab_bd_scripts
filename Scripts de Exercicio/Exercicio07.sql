@@ -31,7 +31,7 @@ WHERE NVL(e.percentual_comissao, 0) > 0;
 
 SELECT e.nome || ' trabalha para ' || NVL(g.nome, 'os acionistas')
 FROM tb_empregado e LEFT OUTER JOIN tb_empregado g ON(e.id_gerente = g.id_empregado)
-ORDER BY g.nome DESC;~
+ORDER BY g.nome DESC;
 
 -- QUESTÃO 5
 
