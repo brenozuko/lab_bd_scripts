@@ -34,3 +34,5 @@ SELECT
 (SELECT COUNT(*) FROM tb_empregado WHERE TO_CHAR(data_admissao,'YYYY') = '1992') AS "contratados em 1992",
 (SELECT COUNT(*) FROM tb_empregado WHERE TO_CHAR(data_admissao,'YYYY') = '1993') AS "contratados em 1993"
 FROM dual;
+
+
