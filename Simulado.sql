@@ -1,6 +1,7 @@
 -- QUESTÃO 1
-SELECT nome, NVL(TO_CHAR(percentual_comissao, '%'), 'Nenhuma comissão') AS "COMISSÂO"
+SELECT nome, NVL(TO_CHAR(percentual_comissao), 'Nenhuma comissão') AS "COMISSÂO"
 FROM tb_empregado;
+
 
 -- QUESTÃO 2
 SELECT MAX(salario) "Maior Salario", MIN(salario) "Menor Salário", 
@@ -21,10 +22,11 @@ ORDER BY e.salario DESC;
 
 -- Questão 04
 
-SELECT COUNT(id_empregado) "Total empregados", TO_CHAR(data_admissao, 'YYYY')
-FROM tb_empregado
-GROUP BY TO_CHAR(data_admissao, 'YYYY')
-HAVING TO_CHAR(data_admissao, 'YYYY') IN ('1990', '1991', '1992', '1993');
+SELECT COUNT(*) total, SUM(DECODE(TO_CHAR(data_admissao, 'YYYY'),1990,1,0)) "1990",
+SUM(DECODE(TO_CHAR(data_admissao, 'YYYY'),1991,1,0)) "1991",
+SUM(DECODE(TO_CHAR(data_admissao, 'YYYY'),1992,1,0)) "1992",
+SUM(DECODE(TO_CHAR(data_admissao, 'YYYY'),1993,1,0)) "1993"
+FROM tb_empregado;
 
 
 SELECT
@@ -71,7 +73,12 @@ INNER JOIN tb_departamento d ON(e.id_departamento = d.id_departamento)
 INNER JOIN tb_localizacao l ON(d.id_localizacao = l.id_localizacao)
 WHERE e.percentual_comissao IS NOT NULL;
 
-
 -- Questão 09
+
 GRANT UPDATE ON tb_departamento TO joao WITH GRANT OPTION;
 
+-- Questão 10
+
+SELECT id_empregado, REPLACE(id_funcao, 'SH', 'SHIPPING') 
+FROM tb_empregado
+WHERE id_funcao LIKE 'SH%';
