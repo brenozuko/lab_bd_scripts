@@ -62,3 +62,12 @@ FROM tb_empregado
 ORDER BY MONTHS_BETWEEN(sysdate, data_admissao);
 
 
+
+-- Questão 08
+
+
+SELECT e.nome, d.nm_departamento, l.cidade, l.estado
+FROM tb_empregado e
+INNER JOIN tb_departamento d ON(e.id_departamento = d.id_departamento)
+INNER JOIN tb_localizacao l ON(d.id_localizacao = l.id_localizacao)
+WHERE e.percentual_comissao IS NOT NULL;
