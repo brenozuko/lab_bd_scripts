@@ -36,3 +36,29 @@ SELECT
 FROM dual;
 
 
+-- Questão 05
+
+SELECT id_empregado || ', ' || nome || ', ' || sobrenome || ', ' || email || ', ' || telefone || ', ' || data_admissao || ', ' ||
+       id_funcao || ', ' || salario || ', ' || percentual_comissao || ', ' || id_gerente || ', ' || id_departamento AS SAIDA
+FROM tb_empregado;
+
+-- Questão 06
+
+SELECT id_funcao "Descrição da Função",
+CASE
+  WHEN id_funcao = 'SH_CLERK'     THEN 'A'
+  WHEN id_funcao = 'ST_MAN'       THEN 'B'
+  WHEN id_funcao = 'AC_ACCOUNT'   THEN 'C'
+  WHEN id_funcao = 'AC_MGR'       THEN 'D'
+  WHEN id_funcao = 'IT_PROG'      THEN 'E'
+  ELSE '0' 
+END AS "Grade"
+FROM tb_empregado;
+
+-- Questão 07
+
+SELECT nome, MONTHS_BETWEEN(sysdate, data_admissao) "Meses Trabalhados"
+FROM tb_empregado
+ORDER BY MONTHS_BETWEEN(sysdate, data_admissao);
+
+
