@@ -7,7 +7,6 @@ SELECT nome,
 NVL(TO_CHAR(percentual_comissao), 'Nenhuma Comissão') AS "COMISSÃO"
 FROM tb_empregado;
 
-
 -- QUESTÃO 2
 SELECT ROUND(MAX(salario),0) "Máximo",
 ROUND(MIN(salario),0) "Mínimo",
@@ -28,18 +27,22 @@ SELECT id_empregado || ', ' || nome || ', ' || sobrenome || ', ' || email || ', 
 FROM tb_empregado;
 
 -- QUESTÃO 5
-
+SELECT nome, MONTHS_BETWEEN(SYSDATE, data_admissao) "Meses Trabalhados"
+FROM tb_empregado
+ORDER BY MONTHS_BETWEEN(SYSDATE, data_admissao);
 
 -- QUESTÃO 6
 GRANT UPDATE ON tb_departamento TO joao WITH GRANT OPTION;
+
+
+-- QUESTÃO 7
+
 
 
 -- QUESTÃO 8
 
 SELECT id_empregado, nome, salario, TO_NUMBER(salario + (salario * 15/100)) AS "Novo Salário"
 FROM tb_empregado;
-
--- QUESTÃO 7
 
 
 -- QUESTÃO 9
@@ -50,3 +53,12 @@ CASE
   THEN LENGTH(nome)
 END AS "Tamanho do nome"
 FROM tb_empregado;
+
+
+-- QUESTÃO 10
+
+SELECT id_departamento, MIN(salario) AS "Menor salário", MAX(salario) "Maior salário"
+FROM tb_empregado
+GROUP BY id_departamento
+HAVING MIN(salario) < 7000
+ORDER BY MIN(salario);
