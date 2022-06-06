@@ -10,14 +10,15 @@ FROM tb_empregado;
 -- QUESTÃO 2
 SELECT 
 ROUND(MAX(salario),0) AS "Máximo",
-ROUND(MIN(salario),0) AS "Mínimo",
 ROUND(AVG(salario),0) AS "Média",
+ROUND(MIN(salario),0) AS "Mínimo",
 ROUND(SUM(salario),0) AS "Somatório"
 FROM tb_empregado;
 
 -- QUESTÃO 3
 SELECT 
-COUNT(*) "TOTAL DE EMPREGADOS", SUM(DECODE(TO_CHAR(data_admissao, 'YYYY'),1990,1,0)) AS "CONTRATADOS EM 1990",
+COUNT(*) "TOTAL DE EMPREGADOS",
+SUM(DECODE(TO_CHAR(data_admissao, 'YYYY'),1990,1,0)) AS "CONTRATADOS EM 1990",
 SUM(DECODE(TO_CHAR(data_admissao, 'YYYY'),1991,1,0)) AS "CONTRATADOS EM 1991",
 SUM(DECODE(TO_CHAR(data_admissao, 'YYYY'),1992,1,0)) AS "CONTRATADOS EM 1992",
 SUM(DECODE(TO_CHAR(data_admissao, 'YYYY'),1993,1,0)) AS "CONTRATADOS EM 1993"
