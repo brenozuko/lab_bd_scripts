@@ -3,11 +3,13 @@
 -- RA: 2840482011010
 
 -- QUESTÃO 1
+
 SELECT nome,
 NVL(TO_CHAR(percentual_comissao), 'Nenhuma Comissão') AS "COMISSÃO"
 FROM tb_empregado;
 
 -- QUESTÃO 2
+
 SELECT 
 ROUND(MAX(salario),0) AS "Máximo",
 ROUND(AVG(salario),0) AS "Média",
@@ -16,6 +18,7 @@ ROUND(SUM(salario),0) AS "Somatório"
 FROM tb_empregado;
 
 -- QUESTÃO 3
+
 SELECT 
 COUNT(*) "TOTAL DE EMPREGADOS",
 SUM(DECODE(TO_CHAR(data_admissao, 'YYYY'),1990,1,0)) AS "CONTRATADOS EM 1990",
@@ -25,18 +28,20 @@ SUM(DECODE(TO_CHAR(data_admissao, 'YYYY'),1993,1,0)) AS "CONTRATADOS EM 1993"
 FROM tb_empregado;
 
 -- QUESTÃO 4
+
 SELECT id_empregado || ', ' || nome || ', ' || sobrenome || ', ' || email || ', ' || telefone || ', ' || data_admissao || ', ' ||
        id_funcao || ', ' || salario || ', ' || percentual_comissao || ', ' || id_gerente || ', ' || id_departamento AS "Saída"
 FROM tb_empregado;
 
 -- QUESTÃO 5
+
 SELECT nome, MONTHS_BETWEEN(SYSDATE, data_admissao) AS "Meses Trabalhados"
 FROM tb_empregado
 ORDER BY MONTHS_BETWEEN(SYSDATE, data_admissao);
 
 -- QUESTÃO 6
-GRANT UPDATE ON tb_departamento TO joao WITH GRANT OPTION;
 
+GRANT UPDATE ON tb_departamento TO joao WITH GRANT OPTION;
 
 -- QUESTÃO 7
 
@@ -65,9 +70,8 @@ FOREIGN KEY (id_depto) REFERENCES tb_departamento(id_departamento);
 
 -- QUESTÃO 8
 
-SELECT id_empregado, nome, salario, TO_NUMBER(salario + (salario * 15/100)) AS "Novo Salário"
+SELECT id_empregado, nome, salario, ROUND(salario + (salario * 15/100), 0) AS "Novo Salário"
 FROM tb_empregado;
-
 
 -- QUESTÃO 9
 
@@ -77,7 +81,6 @@ CASE
   THEN LENGTH(nome)
 END AS "Tamanho do nome"
 FROM tb_empregado;
-
 
 -- QUESTÃO 10
 
